@@ -1,0 +1,28 @@
+﻿@model MicroSocialPlatform.Models.Grouppost
+@{
+    ViewBag.Title = "NewPost";
+}
+@if (User.Identity.IsAuthenticated == true)
+{
+    using (Html.BeginForm(actionName: "NewPost", controllerName: "Group"))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label>Adauga postare</label>
+            </div>
+            <div class="panel-body">
+                @Html.Label("Content", "Content of post:")
+                @Html.TextArea("Content", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger " })
+                <input type="hidden" name="Date" value="@DateTime.Now" />
+                <input type="hidden" name="GroupId" value="@Model.GroupId" />
+                <br />
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <a href="/Account/Login">Log in to add a post</a>
+}

@@ -1,0 +1,28 @@
+﻿@model MicroSocialPlatform.Models.Comment
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Modify comment
+    </div>
+
+    <div class="panel-body">
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Comments"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <br />
+    @Html.Label("Content", "Comment")
+    <br />
+    @Html.Editor("Content", new { @class = "form-control" })
+    <br />
+    <input type="hidden" name="Date" value="@ViewBag.Comment.Date" />
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+    </div>
+</div>

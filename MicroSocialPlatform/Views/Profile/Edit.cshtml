@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNet.Identity;
+@model MicroSocialPlatform.Models.Profile
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Edit profile information
+    </div>
+
+    <div class="panel-body">
+        <form method="post" action="/Profile/Edit/@ViewBag.profile.Id">
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            <label>Email</label>
+            <br />
+            <input type="text" name="Username" value="@ViewBag.profile.Username" />
+            <br /><br />
+            <label>Name</label>
+            <br />
+            <input type="text" name="Name" value="@ViewBag.profile.Name" />
+            <br /><br />
+            <label>About</label>
+            <br />
+            <textarea type="text" name="About" value="@ViewBag.profile.Name">@ViewBag.profile.About</textarea>
+            <br />
+            <label>City</label>
+            <br />
+            <input type="text" name="City" value="@ViewBag.profile.City" />
+            <br />
+            <label>Age</label>
+            <br />
+            <input type="number" name="Age" value="@ViewBag.profile.Age" />
+            <br />
+            <label>Job</label>
+            <br />
+            <input type="text" name="Job" value="@ViewBag.profile.Job" />
+            <br />
+            <label>Public profile</label>
+            <br />
+            @Html.CheckBox("publicProfile")
+            <br />
+            <button type="submit" class="btn btn-success">Modify profile</button>
+        </form>
+    </div>
+</div>

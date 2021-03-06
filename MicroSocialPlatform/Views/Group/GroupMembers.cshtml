@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "GroupMembers";
+}
+
+
+<h2>Member list (@ViewBag.NoMembers):</h2>
+@foreach (var member in ViewBag.Members)
+{
+    <p><a href="/Profile/Index/@member.Id">@member.Name</a></p>
+    if (@ViewBag.Admin == "Yes")
+    {
+        <a href="/RequestGroup/Kick/@ViewBag.Group.Id/@member.Id" class="btn btn-danger">Kick</a>
+    }
+}
+
+</br>
+
+@if (@ViewBag.Admin == "Yes")
+{
+    <h2>Requests to join the group:</h2>
+    foreach (var sender in ViewBag.requestsSenders)
+    {
+        <p><a href="/Profile/Index/@sender.Id">@sender.Name</a></p>
+        <p>
+            <a href="/RequestGroup/Accept/@ViewBag.Group.Id/@sender.Id" class="btn btn-sm full-width btn-primary">Accept</a>
+            <br />
+            <a href="/RequestGroup/Refuse/@ViewBag.Group.Id/@sender.Id" class="btn btn-danger">Refuse</a>
+        </p>
+    }
+
+}

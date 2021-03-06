@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MicroSocialPlatform.Models.Profile>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search: @ViewBag.Searched</h2>
+@foreach (var res in Model)
+{
+    <a href="/Profile/Index/@res.Id">@res.Name - @res.Username </a>
+    <br />
+}
+@if (!Model.Any())
+{
+    <p>No result</p>
+}
+

@@ -1,0 +1,23 @@
+﻿@{ ViewBag.Title = "Index"; }
+
+<h1>@ViewBag.Message</h1>
+<h2>Groups</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="/Group/New" class="btn btn-primary btn-lg">Create a group</a>
+}
+<br />
+@foreach (var group in ViewBag.Groups)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10"><a href="/Group/Show/@group.Id" class="panel-title">@group.Name</a></div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <p class="">@group.Description</p>
+            <br />
+        </div>
+    </div>
+}

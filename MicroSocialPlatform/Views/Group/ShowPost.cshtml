@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity;
+@model MicroSocialPlatform.Models.Grouppost
+
+@{
+    ViewBag.Title = "ShowPost";
+}
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10"><a href="/Profile/Index/@Model.User.Id">@Model.User.UserName</a></div>
+                <div class="col-xs-2"><p class="post-date">@Model.Date</p></div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h4>@Model.Content</h4>
+            @if (ViewBag.Owner == true)
+            {
+
+
+                <a href="/Group/EditPost/@Model.GroupId/@Model.Id" class="btn btn-sm btn-primary">Edit post</a>
+
+                <form method="post" action="/Group/DeletePost/@Model.GroupId/@Model.Id" id="delete-post-form" class="btn">
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                    <button type="submit" class="btn btn-sm btn-danger">Delete post</button>
+                </form>
+
+
+            }
+            <br />
+
+        </div>
+    </div>
+
+    <a href="/Group/Show/@Model.GroupId" class="btn btn-primary">Back to group</a>
+    <br />
+

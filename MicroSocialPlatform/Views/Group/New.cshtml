@@ -1,0 +1,28 @@
+﻿@model MicroSocialPlatform.Models.Group
+@{
+    ViewBag.Title = "New";
+}
+@if (User.Identity.IsAuthenticated == true)
+{
+    using (Html.BeginForm(actionName: "New", controllerName: "Group"))
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label>Create a group</label>
+            </div>
+            <div class="panel-body">
+                @Html.Label("Name", "Group name:")
+                @Html.TextArea("Name", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger " })
+                @Html.Label("Description", "Enter a description:")
+                @Html.TextArea("Description", null, new { @class = "form-control" })
+                <br />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <a href="/Account/Login">Log in to create a group</a>
+}

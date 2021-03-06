@@ -1,0 +1,29 @@
+﻿@model MicroSocialPlatform.Models.Grouppost
+
+@{
+    ViewBag.Title = "EditPost";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Modify post
+    </div>
+
+    <div class="panel-body">
+        @using (Html.BeginForm(actionName: "EditPost", controllerName: "Group"))
+        {
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            <br />
+            @Html.Label("Content", "Modified post")
+            <br />
+            @Html.TextArea("Content", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger " })
+            <input type="hidden" name="GroupId" value="@Model.GroupId" />
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <br />
+            <button type="submit" class="btn btn-sm stn-succes">Save</button>
+
+        }
+
+    </div>
+</div>

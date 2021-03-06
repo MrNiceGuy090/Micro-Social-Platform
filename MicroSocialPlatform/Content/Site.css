@@ -1,0 +1,65 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 500px;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Custom css */
+/* navbar color */
+.navbar {
+    background-color: #4B4C62;
+}
+
+/* bg color */
+.body {
+    background-color: #E8E8F6;
+}
+
+/* panels color */
+.panel-default > .panel-heading {
+    background-color: #D1BDF6;
+    color: #4B4C60;
+}
+
+.btn-primary {
+    background-color: #8658B1;
+}
+.btn-primary:hover {
+    background-color: #5F3E7D;
+}
+.btn-primary:active {
+        background-color: #5F3E7D;
+}
+a {
+    color: #4B4C60;
+}
+.delete-post-form{
+    max-width:280px;
+}

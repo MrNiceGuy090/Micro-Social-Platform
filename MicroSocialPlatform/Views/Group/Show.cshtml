@@ -1,0 +1,46 @@
+﻿@{ ViewBag.Title = "Index"; }
+
+<h1>@ViewBag.Message</h1>
+<h2>@ViewBag.Group.Name</h2>
+<div class="row">
+    <div class="col-xs-2">
+        <a href="/Group/GroupMembers/@ViewBag.Group.Id" class="btn btn-primary">Member list</a>
+    </div>
+        @if (@ViewBag.Member == "true")
+        {
+          
+        <div class="col-xs-2">
+            <a href="/Group/NewPost/@ViewBag.Group.Id" class="btn btn-primary">Add a new post</a>
+        </div>
+            }
+        else if (@ViewBag.Member == "false")
+        {
+        <div class="col-xs-2">
+            <a href="/RequestGroup/Send/@ViewBag.Group.Id" class="btn btn-primary">Join the group</a>
+        </div>
+            }
+        else if (@ViewBag.Member == "pending")
+        {
+            <p>Your request to join the group is pending approval.</p>
+        }
+        <br />
+    </div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        @foreach (var post in ViewBag.Posts)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-10"><a href="/Profile/Index/@post.User.Id" class="panel-title">@post.User.UserName</a></div>
+                        <div class="col-xs-2"><p class="text-muted mb-1 post-date">@post.Date</p></div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <p class="">@post.Content</p>
+                    <a href="/Group/ShowPost/@ViewBag.Group.Id/@post.Id" class="btn btn-sm full-width btn-primary">Check post</a>
+                    <br />
+                </div>
+            </div>}
+        </div>
+    </div>

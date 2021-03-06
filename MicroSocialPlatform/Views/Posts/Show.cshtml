@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNet.Identity;
+@model MicroSocialPlatform.Models.Post
+
+@{
+    ViewBag.Title = "Show";
+}
+@if(ViewBag.Show == true) {
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-10"><a href="/Profile/Index/@Model.User.Id">@Model.User.UserName</a></div>
+                <div class="col-xs-2"><p class="post-date">@Model.Date</p></div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <h4>@Model.Content</h4>
+            @if (ViewBag.Owner == true)
+            {
+       
+                          
+                                <a href="/Posts/Edit/@Model.Id" class="btn btn-sm btn-primary">Edit post</a>
+                               
+                                    <form method="post" action="/Posts/Delete/@Model.Id" id="delete-post-form" class="btn">
+                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete post</button>
+                                    </form>
+                                
+                               
+              }
+            <br />
+            <p>Comments</p>
+            @foreach (var comment in Model.Comments)
+            {
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-10"><a href="/Profile/Index/@comment.User.Id">@comment.User.UserName</a></div>
+                    <div class="col-xs-2"><p>@comment.Date</p></div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <p>@comment.Content</p>
+
+
+
+                @if (comment.UserId == User.Identity.GetUserId())
+                {
+        <a href="/Comments/Edit/@comment.Id" class="btn btn-primary">Edit comment</a>
+                                <a href="/Comments/Delete/@comment.Id" class="btn btn-danger">Delete comment</a>
+                                                        <br />}
+            </div>
+        </div>}
+            @if (User.Identity.IsAuthenticated == true)
+            {
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Add comment
+            </div>
+
+            <div class="panel-body">
+                <form method="post" action="/Comments/New">
+                    <textarea name="Content" class="form-control"></textarea>
+                    <input type="hidden" name="Date" value="@DateTime.Now" />
+                    <input type="hidden" name="PostId" value="@ViewBag.PostId" />
+                    <br />
+                    <button type="submit" class="btn-sm btn btn-primary">Add comment</button>
+                </form>
+
+
+            </div>
+        </div> <br />}
+
+        </div>
+    </div>
+
+    
+    
+    
+    
+
+    <a href="/Posts/Index" class="btn btn-primary">All posts</a>
+    <br />
+}
+else
+{
+    <p>Private post</p>
+}

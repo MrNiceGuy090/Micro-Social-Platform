@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNet.Identity;
+@{ ViewBag.Title = "Index"; }
+
+<h2>Utilizatorul: @ViewBag.User.Name </h2>
+<!-- cazurile in care afisez detalii personale -->
+@if (ViewBag.User.publicProfile == true | ViewBag.User.Id == User.Identity.GetUserId() | ViewBag.Friendship == "prieteni")
+{
+    if (ViewBag.User.Id == User.Identity.GetUserId())
+    {
+        <a href="/Profile/Edit/@ViewBag.User.Id" class="btn btn-primary" role="button">Edit profile</a>
+    }
+    else if(ViewBag.Friendship == "prieteni")
+    {
+        <p>Sunteti prieteni.</p>
+        <a href="/Requests/Remove/@ViewBag.User.Id" class="btn btn-danger">Remove friend</a>
+    }
+    else if(ViewBag.Friendship == "straini" & ViewBag.User.publicProfile == true)
+    {
+        <a href="/Requests/Send/@ViewBag.User.Id" class="btn btn-succes">Trimite o cerere de prietenie</a>
+    }
+        else if (ViewBag.Friendship == "trimisa")
+    {
+        <p>Cerere de prietenie trimisa</p> 
+    }
+    else if (ViewBag.Friendship == "primita")
+    {
+        <a href="/Requests/Accept/@ViewBag.User.Id" class="btn btn-succes">Accepta cererea de prietenie</a>
+        <a href="/Requests/Refuse/@ViewBag.User.Id" class="btn btn-danger">Sterge cererea de prietenie</a> 
+    }
+       // lista de prieteni
+    <a href="/Profile/Friends/@ViewBag.User.Id" class="btn btn-primary">Friend list</a>
+    <br />
+    <p><b>Email:</b> @ViewBag.User.Username</p>
+    <p><b>About:</b> @ViewBag.User.About</p>
+    <p><b>City:</b> @ViewBag.User.City</p>
+    <p><b>Age:</b> @ViewBag.User.Age</p>
+    <p><b>Job:</b> @ViewBag.User.Job</p>
+    // postari
+    <h2>Postari</h2> foreach (var post in ViewBag.Posts)
+    {    
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-10"><a href="/Profile/Index/@post.User.Id" class="panel-title">@post.User.UserName</a></div>
+            <div class="col-xs-2"><p class="text-muted mb-1">@post.Date</p></div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <p class="card-text">@post.Content</p>
+        <a href="/Posts/Show/@post.Id" class="btn btn-sm btn-primary full-width">Vezi postarea</a>
+        <br />
+    </div>
+</div>
+
+
+}
+
+}
+else if(ViewBag.User.publicProfile == false)
+{
+    if(ViewBag.Friendship == "straini")
+    {
+        <a href="/Requests/Send/@ViewBag.User.Id" class="btn btn-succes">Trimite o cerere de prietenie</a>
+    }
+    else if (ViewBag.Friendship == "trimisa")
+    {
+        <p>Cerere de prietenie trimisa</p> 
+    }
+    else if (ViewBag.Friendship == "primita")
+    {
+        <a href="/Requests/Accept/@ViewBag.User.Id" class="btn btn-succes">Accepta cererea de prietenie</a>
+        <a href="/Requests/Refuse/@ViewBag.User.Id" class="btn btn-danger">Sterge cererea de prietenie</a> 
+    }
+    else
+    {
+        <p>Acest profil este privat</p>
+    }
+}
+
+    

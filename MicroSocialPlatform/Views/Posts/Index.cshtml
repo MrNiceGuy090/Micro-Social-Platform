@@ -1,0 +1,25 @@
+﻿@{ ViewBag.Title = "Index"; }
+
+<h1>@ViewBag.Message</h1>
+<h2>Posts</h2>
+@if (User.Identity.IsAuthenticated)
+{
+<a href="/Posts/New" class="btn btn-primary btn-lg">Adauga postare</a>
+}
+<br />
+@foreach (var post in ViewBag.Posts)
+{
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-10"><a href="/Profile/Index/@post.User.Id" class="panel-title">@post.User.UserName</a></div>
+            <div class="col-xs-2"><p class="text-muted mb-1 post-date">@post.Date</p></div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <p class="">@post.Content</p>
+        <a href="/Posts/Show/@post.Id" class="btn btn-sm full-width btn-primary">Vezi postarea</a>
+        <br />
+    </div>
+</div>}
+

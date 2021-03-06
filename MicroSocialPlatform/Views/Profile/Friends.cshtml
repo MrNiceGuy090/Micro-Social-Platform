@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Friends";
+}
+
+<h2>Friend list (@ViewBag.NoFriends):</h2>
+@foreach (var prieten in ViewBag.Friends)
+{
+    <p><a href="/Profile/Index/@prieten.Id">@prieten.Name</a></p>
+}
+
+</br>
+@if (User.Identity.GetUserId() == ViewBag.User.Id)
+{
+    <h2>Friend Requests</h2>
+    foreach (var sender in ViewBag.requestsSenders)
+    {
+        var id = sender[0];
+        var name = sender[1];
+        <p><a href="/Profile/Index/@id">@name</a></p>
+    }
+
+}
